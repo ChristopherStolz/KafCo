@@ -5,20 +5,30 @@ import org.springframework.data.annotation.Id;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-public class DataRun {
+import java.io.Serializable;
+
+public class DataRun implements Serializable{
   @Id
   public String id;
   
   private int index;
   private int iteratorIndex;
+  private String date;
+  private String meterName;
   private ListIterator iterator;
   private LinkedList<String[][]> data;
 
   public DataRun() {
 	data = new LinkedList<String[][]>();
-    data.add(new String[2][100]); //indexes flipped for X,Y representation
+    data.add(new String[2][100]); //indices flipped for X,Y representation
     iterator = data.listIterator();
     iteratorIndex = 0;
+  }
+  
+  public DataRun(String meterName, String dateTime) {
+	  id = meterName + "-" + dateTime;
+	  this.meterName = meterName;
+	  date = dateTime; // TODO: cut off the time before storing.
   }
   
   public boolean writeData(String[] dataObject){
@@ -45,6 +55,7 @@ public class DataRun {
 	  }
 	  return true;
   }
+  
   public LinkedList<String[][]> getData (){
 	  /*
 	   * TODO: Define more robust behavior.

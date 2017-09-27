@@ -5,22 +5,31 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import java.util.Date;
+
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
 public class Meter {
 	
-	InputStream iStream;
-	SerialPort serialPort;
-	Thread readThread;
-	byte[] readBuffer;
+	private InputStream iStream;
+	private SerialPort serialPort;
+	private Thread readThread;
+	private byte[] readBuffer;
+	private DataRun myData;
+	private int timeOffset;
+	private String myName;
 	
 	public Meter () {
 		serialPort = null;
 	}
 	
-	public Meter (String portId){
-		serialPort = new SerialPort(portId);
+	public Meter(String portName, Thread thread, String meterName, int timeOffset) {
+		serialPort = new SerialPort(portName);
+		readThread = thread;
+		myName = meterName;
+		myData = new DataRun(myName, new Date().toString());
+		this.timeOffset = timeOffset;
 	}
 	
 	public byte[] read() throws SerialPortException{
@@ -40,5 +49,18 @@ public class Meter {
 		serialPort.writeBytes("test string".getBytes());
 		serialPort.closePort();
 		return false;
+	}
+	
+	public DataRun getData (){
+		return myData;
+	}
+	
+	public boolean setTimeOffset (int timeOffset) {
+		this.timeOffset = timeOffset;
+		return true;
+	}
+	
+	public int getTimeOffset (){
+		return timeOffset;
 	}
 }
