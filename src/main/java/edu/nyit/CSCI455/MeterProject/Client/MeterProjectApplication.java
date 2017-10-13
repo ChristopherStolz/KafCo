@@ -24,9 +24,8 @@ public class MeterProjectApplication{
 			.web(true)
 			.run(args);
 		Meter meter = new Meter("meter", 100);
-		byte[] bytes = meter.read();
-		String s = new String(bytes);
-		System.out.println(s);
+		String result = meter.read();
+		System.out.println(result);
 		//dataRepository.insert(meter.getData());
 		//dataRepository.saveAll();
 		

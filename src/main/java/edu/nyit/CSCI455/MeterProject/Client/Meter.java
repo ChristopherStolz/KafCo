@@ -18,17 +18,15 @@ import java.util.Date;
 
 
 public class Meter {
-	
+	/*
+	 * Define constants used in communication; STX = Start text, ETX = End Text (Control Flow)
+	 * ZERO is ASCII Zero; The KafCo device takes a Zero before it will write back.
+	 */
 	private final char STX = (char)2;
 	private final char ETX = (char)3;
 	private final char ZERO = (char)48;
 	
-	private InputStream iStream;
-	private OutputStream oStream;
-	private PrintWriter oWriter;
-	private BufferedReader iReader;
-	private SerialPort serialPort;	
-	private byte[] readBuffer;
+	private SerialPort serialPort;
 	private DataRun myData;
 	private int timeOffset;
 	private String myName;
@@ -38,15 +36,38 @@ public class Meter {
 	}
 	
 	public Meter(String meterName, int timeOffset) {
+		/*
+		 * Initialize instance variables
+		 */
+		this.timeOffset = timeOffset;
+		this.myName = meterName;
+		myData = new DataRun(myName, new Date().toString());
+		
+		
+		/*
+		 * Get the list of port names; All connected Serial Devices go into this list.
+		 * To use multiple meters we will need to pass a param for what device should be connected
+		 */
 		String[] portNames = SerialPortList.getPortNames();
 		
 		if (portNames.length == 0){
+			/*
+			 * If there are no serial devices connected we error;
+			 * TODO: Robust error behavior for GUI
+			 */
 			System.out.println("No serial device connected.");
 		}
 		
+		/*
+		 * Currently defaults to first connected device
+		 * Should be parameterized so we can select and connect multiple devices
+		 */
 		serialPort = new SerialPort(portNames[0]);
+		
 		try{
-			
+		/*
+		 * Initialize the serial connection
+		 */
 		serialPort.openPort();
 		
 		serialPort.setParams(serialPort.BAUDRATE_9600,
@@ -54,35 +75,22 @@ public class Meter {
 							serialPort.STOPBITS_1,
 							serialPort.PARITY_NONE);
 		
-		serialPort.setFlowControlMode(serialPort.FLOWCONTROL_RTSCTS_IN |
-									  serialPort.FLOWCONTROL_RTSCTS_OUT);
-		
-		serialPort.addEventListener(new PortReader(), SerialPort.MASK_RXCHAR);
+		serialPort.setFlowControlMode(serialPort.FLOWCONTROL_NONE);
+
 		} catch (SerialPortException e) {
-			System.out.println(e.getStackTrace().toString());
+			System.out.println("Serial device initialization failed: " + e);
 		}
-		//iStream = serialPort.getInputStream();
-		//oWriter = new PrintWriter(serialPort.getOutputStream());
-		//iReader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
-		myName = meterName;
-		readBuffer = new byte[8];
-		myData = new DataRun(myName, new Date().toString());
-		this.timeOffset = timeOffset;
+		
 	}
 	
-	public byte[] read(){
+	public String read(){
 		/*
 		 * TODO: Define readThread 
 		 */
+		String result = new String();
 		try{
-			//System.out.println(serialPort.isOpen() + "");
-			//oWriter.write(STX + ZERO + ETX);
-			//oWriter.flush();
-			//int read = serialPort.readBytes(readBuffer, 8);
-			//String read = iReader.readLine();
-			//System.out.println(readBuffer + " test");
-			System.out.print(STX + "," + ZERO + "," + ETX);
-			serialPort.writeString(STX + "," + ZERO + "," + ETX);
+			serialPort.writeString(ZERO + ""); //KafCo device wants a ZERO before returning result (mode?)
+			result = serialPort.readString(); //Read the meter
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -91,20 +99,18 @@ public class Meter {
 		}catch (SerialPortException e){
 			System.out.println(e.getStackTrace().toString());
 		}
-		String[] outData = {"0", "" + readBuffer};
-		//myData.writeData(outData);
-/*		serialPort.openPort();
-		serialPort.setParams(57600, 8, 1, 0); //Baud Rate, dataBits, stopBits, parity
-		readBuffer = serialPort.readBytes(10); //reads 10 bytes; default value; need to test
-		serialPort.closePort();*/
-		return readBuffer;
+		
+		String[] results = result.split(",");
+		result = results[2];
+		String[] outData = {"0", "" + result};
+		myData.writeData(outData);
+		return result;
 	}
 	
 	public boolean write(){
-		/*serialPort.openPort();
-		serialPort.setParams(57600, 8, 1, 0); //Baud Rate, dataBits, stopBits, parity
-		serialPort.writeBytes("test string".getBytes());
-		serialPort.closePort();*/
+		/*
+		 * May need this later;
+		 */
 		return false;
 	}
 	
@@ -120,20 +126,7 @@ public class Meter {
 	public int getTimeOffset (){
 		return timeOffset;
 	}
-	
-	private class PortReader implements SerialPortEventListener {
-		@Override
-		public void serialEvent(SerialPortEvent event){
-			if (event.isRXCHAR() && event.getEventValue() > 0) {
-				try{
-					String receivedData = serialPort.readString(event.getEventValue());
-					System.out.println("Received response: " + receivedData);
-				}catch(SerialPortException e){
-					System.out.println("Error in receiving string " + e);
-				}
-			}
-		}
+	public String getName(){
+		return myName;
 	}
 }
-
-
