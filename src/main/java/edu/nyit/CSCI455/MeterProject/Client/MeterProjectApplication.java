@@ -24,8 +24,16 @@ public class MeterProjectApplication{
 			.web(true)
 			.run(args);
 		Meter meter = new Meter("meter", 100);
-		String result = meter.read();
-		System.out.println(result);
+		String result;
+		for (int i = 0; i < 9; i++){
+			result = meter.KafCoRead();
+			System.out.println(result);
+			try{
+				Thread.sleep(100);
+			} catch(Exception e){
+				
+			}
+		}
 		//dataRepository.insert(meter.getData());
 		//dataRepository.saveAll();
 		

@@ -22,9 +22,9 @@ public class Meter {
 	 * Define constants used in communication; STX = Start text, ETX = End Text (Control Flow)
 	 * ZERO is ASCII Zero; The KafCo device takes a Zero before it will write back.
 	 */
-	private final char STX = (char)2;
-	private final char ETX = (char)3;
-	private final char ZERO = (char)48;
+	public final char STX = (char)2;
+	public final char ETX = (char)3;
+	public final char ZERO = (char)48;
 	
 	private SerialPort serialPort;
 	private DataRun myData;
@@ -49,7 +49,6 @@ public class Meter {
 		 * To use multiple meters we will need to pass a param for what device should be connected
 		 */
 		String[] portNames = SerialPortList.getPortNames();
-		
 		if (portNames.length == 0){
 			/*
 			 * If there are no serial devices connected we error;
@@ -63,7 +62,6 @@ public class Meter {
 		 * Should be parameterized so we can select and connect multiple devices
 		 */
 		serialPort = new SerialPort(portNames[0]);
-		
 		try{
 		/*
 		 * Initialize the serial connection
@@ -83,10 +81,17 @@ public class Meter {
 		
 	}
 	
-	public String read(){
+	public String KafCoRead(){
 		/*
 		 * TODO: Define readThread 
 		 */
+		if (!serialPort.isOpened()){
+			try{
+				serialPort.openPort();
+			} catch (SerialPortException e){
+				System.out.println("Error opening port in KafCoRead(): " + e);
+			}
+		}
 		String result = new String();
 		try{
 			serialPort.writeString(ZERO + ""); //KafCo device wants a ZERO before returning result (mode?)
@@ -94,16 +99,15 @@ public class Meter {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		try{
-			serialPort.closePort();
-		}catch (SerialPortException e){
-			System.out.println(e.getStackTrace().toString());
-		}
-		
+//		try{
+//			serialPort.closePort();
+//		}catch (SerialPortException e){
+//			System.out.println(e.getStackTrace().toString());
+//		}
 		String[] results = result.split(",");
 		result = results[2];
 		String[] outData = {"0", "" + result};
-		myData.writeData(outData);
+		//myData.writeData(outData);
 		return result;
 	}
 	
