@@ -15,6 +15,5 @@ public interface UserRepository extends MongoRepository<User, String>{
  * TODO: Define database calls available
  * Update
  */
-	public List<User> findAll(); 
-	public 
+	public List<User> findAll();
 }
