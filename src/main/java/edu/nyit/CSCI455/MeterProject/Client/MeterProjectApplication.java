@@ -49,9 +49,4 @@ public class MeterProjectApplication{
 		}
 
 	}
-	
-	@Bean
-	public static MeterFrame frame(){
-		return new MeterFrame();
-	}
 }

@@ -1,0 +1,84 @@
+package edu.nyit.CSCI455.MeterProject.Data;
+
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "User")
+public class User{
+
+	@Id
+	public String Id;
+	
+	private String firstName;
+	private String lastName;
+	private Date dateAdded;
+	private String userName;
+	private String password;
+	private Boolean admin;
+	
+	public User (String first, String last, String userName, String password){
+		firstName = first;
+		lastName = last;
+		this.userName = userName;
+		this.password = password;
+		admin = false;
+		dateAdded = new Date();
+		Id = this.lastName + this.firstName + dateAdded;
+	}
+	public User (String first, String last, String userName, String password, boolean admin){
+		firstName = first;
+		lastName = last;
+		this.userName = userName;
+		this.password = password;
+		this.admin = admin;
+		dateAdded = new Date();
+		Id = this.lastName + this.firstName + dateAdded;
+	}
+	public User (String first, String last, String userName, String password, boolean admin, Date added){
+		firstName = first;
+		lastName = last;
+		this.userName = userName;
+		this.password = password;
+		this.admin = admin;
+		dateAdded = added;
+		Id = this.lastName + this.firstName + dateAdded;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public Date getDateAdded() {
+		return dateAdded;
+	}
+	public void setDateAdded(Date dateAdded) {
+		this.dateAdded = dateAdded;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
+}

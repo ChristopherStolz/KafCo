@@ -1,4 +1,4 @@
-package edu.nyit.CSCI455.MeterProject.Client;
+package edu.nyit.CSCI455.MeterProject.Server;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import edu.nyit.CSCI455.MeterProject.Data.DataRun;
 
 @RestController
 @RequestMapping("/db")
-public class RestAPI {
+public class DataRestAPI {
 	@Autowired
 	private DataRepository dataRepository;
 	
@@ -39,4 +39,6 @@ public class RestAPI {
 		dataMap.put("data", data);
 		return dataMap;
 	}
+	
+	
 }
