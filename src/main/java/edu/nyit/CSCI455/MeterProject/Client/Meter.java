@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Random;
 
 
 public class Meter {
@@ -41,7 +42,7 @@ public class Meter {
 		 */
 		this.timeOffset = timeOffset;
 		this.myName = meterName;
-		myData = new DataRun(myName, new Date().toString());
+		myData = new DataRun(myName, new Date().toString(), timeOffset);
 		
 		
 		/*
@@ -96,18 +97,21 @@ public class Meter {
 		try{
 			serialPort.writeString(ZERO + ""); //KafCo device wants a ZERO before returning result (mode?)
 			result = serialPort.readString(); //Read the meter
+			while(result == null){
+				result = serialPort.readString();
+			}
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-//		try{
-//			serialPort.closePort();
-//		}catch (SerialPortException e){
-//			System.out.println(e.getStackTrace().toString());
-//		}
 		String[] results = result.split(",");
 		result = results[2];
-		String[] outData = {"0", "" + result};
-		//myData.writeData(outData);
+		/*
+		 * Running result through random number generator as per midterm presentation
+		 */
+		Random rand = new Random();
+		int resultInt = Integer.parseInt(result);
+		result = (resultInt * rand.nextFloat()) + "";
+		myData.writeData(result);
 		return result;
 	}
 	

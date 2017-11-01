@@ -3,6 +3,8 @@ package edu.nyit.CSCI455.MeterProject.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -12,52 +14,30 @@ public class DataRun{
 	@Id
 	public String id;
 
-	private int index;
-	private int iteratorIndex;
 	private String date;
 	private String meterName;
-	private ListIterator iterator;
-	private LinkedList<String[][]> data;
+	private int timeOffset;
+	private ArrayList<String> data;
 
 	public DataRun() {
-		data = new LinkedList<String[][]>();
-		data.add(new String[2][100]); //indices flipped for X,Y representation
-		iterator = data.listIterator();
-		iteratorIndex = 0;
+		data = new ArrayList<String>();
+		date = new Date().toString();
 	}
 
-	public DataRun(String meterName, String dateTime) {
+	public DataRun(String meterName, String dateTime, int timeOffset) {
 		id = meterName + "-" + dateTime;
 		this.meterName = meterName;
+		this.timeOffset = timeOffset;
 		date = dateTime; // TODO: cut off the time before storing.
+		data = new ArrayList<String>();
 	}
 
-	public boolean writeData(String[] dataObject){
-		String[][] current = data.get(iteratorIndex); //loads the current array of the data list
-		if(index == 100){
-			/*
-			 * If data array is full, initialize a new data array
-			 */
-			String[][] helper = new String[2][100];
-			helper[0][0] = dataObject[0];
-			helper[1][0] = dataObject[1];
-			data.add(new String[2][100]);
-			iteratorIndex = iterator.nextIndex();
-			iterator.next();
-			index = 0;
-		} else {
-			/*
-			 * Write to the data array
-			 */
-			current[0][index] = dataObject[0];
-			current[1][index] = dataObject[1];
-			data.set(iteratorIndex, current); //write back the current array of the data list
-			index++;
-		}
+	public boolean writeData(String dataObject){
+		data.add(dataObject);
 		return true;
 	}
 
-	public LinkedList<String[][]> getData (){
+	public ArrayList<String> getData (){
 		/*
 		 * TODO: Define more robust behavior.
 		 * Currently returns the list raw
@@ -89,7 +69,7 @@ public class DataRun{
 		this.meterName = meterName;
 	}
 
-	public void setData(LinkedList<String[][]> data) {
+	public void setData(ArrayList<String> data) {
 		this.data = data;
 	}
 

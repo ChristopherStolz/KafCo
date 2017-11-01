@@ -4,8 +4,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 
 import edu.nyit.CSCI455.MeterProject.Data.DataRepository;
+import edu.nyit.CSCI455.MeterProject.Data.DataService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
@@ -14,39 +17,23 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 @SpringBootApplication
-public class MeterProjectApplication{
-	@Autowired
-	private DataRepository dataRepository;
+public class MeterProjectApplication implements CommandLineRunner{
 	
-	public static void main(String[] args) {
-		new SpringApplicationBuilder(MeterProjectApplication.class)
-			.headless(false)
-			.web(true)
-			.run(args);
+	@Autowired
+	DataRepository dataService;
+	
+	public static void main(String[] args){
+		SpringApplication.run(MeterProjectApplication.class, args);
+	}
+	
+	@Override
+	public void run(String...args) throws Exception{
 		Meter meter = new Meter("meter", 100);
 		String result;
-		for (int i = 0; i < 9; i++){
+		for (int i = 0; i < 10; i++){
 			result = meter.KafCoRead();
 			System.out.println(result);
-			try{
-				Thread.sleep(100);
-			} catch(Exception e){
-				
-			}
 		}
-		//dataRepository.insert(meter.getData());
-		//dataRepository.saveAll();
-		
-		/*
-		 * Creating an outputstream for test data from the meter
-		 */
-		File file = new File ("Test.txt");
-		PrintWriter out = null;
-		try{
-			out = new PrintWriter(new FileOutputStream(file));
-		}catch (IOException e){
-			System.out.println("foo");
-		}
-
+		dataService.save(meter.getData());
 	}
 }

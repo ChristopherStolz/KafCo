@@ -21,7 +21,7 @@ public class UserRestAPI {
 	@RequestMapping("/create")
 	 public Map<String, Object> create(User data) {
 		  //data.setDate(new Date().toString());
-		  data = userRepository.save(data);
+		  userRepository.save(data);
 		  Map<String, Object> dataMap = new HashMap<String, Object>();
 		  dataMap.put("message", "Data created successfully");
 		  dataMap.put("status", "1");
