@@ -96,9 +96,8 @@ public class Meter {
 		String result = new String();
 		try{
 			serialPort.writeString(ZERO + ""); //KafCo device wants a ZERO before returning result (mode?)
-			result = serialPort.readString(); //Read the meter
 			while(result == null){
-				result = serialPort.readString();
+				result = serialPort.readString(); //Read the meter
 			}
 		} catch (Exception e){
 			e.printStackTrace();

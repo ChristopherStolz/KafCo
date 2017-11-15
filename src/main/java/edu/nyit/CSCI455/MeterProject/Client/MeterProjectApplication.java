@@ -4,7 +4,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 
 import edu.nyit.CSCI455.MeterProject.Data.DataRepository;
-import edu.nyit.CSCI455.MeterProject.Data.DataService;
+import edu.nyit.CSCI455.MeterProject.Data.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +21,8 @@ public class MeterProjectApplication implements CommandLineRunner{
 	
 	@Autowired
 	DataRepository dataService;
+	@Autowired
+	UserRepository userService;
 	
 	public static void main(String[] args){
 		SpringApplication.run(MeterProjectApplication.class, args);

@@ -18,31 +18,36 @@
   	<ul class = "nav navbar-nav">
   		<li><a href="/welcome">Home</a></li>
       <li><a href="/contact">Contact us</a></li>
-      <c:if test="${sessionScope.user != null}">
+	</ul>
+      <c:if test="${sessionScope.user.email != null}">
+	  <ul class = "nav navbar-nav navbar-right">
         <li><a href = "#">View Reports</a></li>
+		<li><a href = "#">User Control Panel</a></li>
+		<li><a href = "#">Admin Control Panel</a></li>
+		</ul>
       </c:if>
-    </ul>
+	<c:if test="${sessionScope.user.email == null}">
       <ul class="nav navbar-nav navbar-right">
         <li><a href = "/signup"> Sign Up </a></li>
 		<li class = "dropdown">
 			<a href = "#" class = "dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class = "caret"></span></a>
 			<ul id = "login-dp" class = "dropdown-menu">
 			<div class = "col-xs-12">
-				<form class = "form" role = "form" method = "post" action = "login" accept-charset="UTF-8" id = "login-nav">
+				<form action = "doLogin" method = "POST"  role = "form" accept-charset="UTF-8" id = "login-nav">
 					<div class = "form-group">
 						<label class="sr-only" for="inputEmail"> Email Address </label>
-						<input type = "email" class = "form-control" id = "inputEmail" placeholder = "Email Address" required>
+						<input type = "email" class = "form-control" name = "email" id = "email" placeholder = "Email Address" required>
 					</div>
 					<div class = "form-group">
 						<label class ="sr-only" for="inputPassword"> Password </label>
-						<input type = "password" class = "form-control" id = "inputPassword" placeholder = "Password" required>
+						<input type = "password" class = "form-control" name = "password" id = "password" placeholder = "Password" required>
 					</div>
 					<div class = "form-group">
 						<button type="submit" class = "btn btn-primary btn-block">Sign In</button>
 					</div>
 					<div class ="checkbox">
 						<label>
-						<input type="checkbox"> keep me logged in
+						<input type="checkbox" name = "keepLogged" id = "keepLogged"> keep me logged in
 						</label>
 					</div>
 				</form>
@@ -50,6 +55,7 @@
 			</ul>
         </li>
       </ul>
+	</c:if>
     </div>
   </nav>
 </body>
