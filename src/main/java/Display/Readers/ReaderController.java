@@ -31,7 +31,7 @@ public class ReaderController {
 			.observableArrayList("1","2","3","4");
 	
 	ObservableList<String> timeIntList = FXCollections
-			.observableArrayList("100 MillieSeconds","200 MillieSeconds","300 MillieSeconds","400 MillieSeconds","500 MillieSeconds","600 MillieSeconds","700 MillieSeconds","800 MillieSeconds","900 MillieSeconds","1000 MillieSeconds");
+			.observableArrayList("100","200","300","400","500","600","700","800","900","1000");
 	
 
 	//brings you back to the login screen
@@ -53,11 +53,13 @@ public class ReaderController {
 	public void initialize(){
 		comPortBox.setValue("1");
 		comPortBox.setItems(comPortList);
-		timeIntBox.setValue("100 MillieSeconds");
+		timeIntBox.setValue("100");
 		timeIntBox.setItems(timeIntList);
 
 		
 	}
+
+
 	
 	
 	@FXML
@@ -87,7 +89,7 @@ public class ReaderController {
 	@FXML
 	private void chartBtn (ActionEvent event) throws InterruptedException{
 		XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
-		
+		int selectedChoice = Integer.parseInt((String)timeIntBox.getSelectionModel().getSelectedItem());
 		
 		float[] floatArray = new float[101];
 		AreaChart.getData().add(series);//graphs point
@@ -115,7 +117,7 @@ public class ReaderController {
 			      });
 			      i++;
 			      //sleeps after every point
-			      Thread.sleep(100);
+			      Thread.sleep(selectedChoice);
 			    }
 			  }
 			};
