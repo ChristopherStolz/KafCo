@@ -106,7 +106,7 @@ public class ReaderController {
 			        @Override
 			        public void run() {			        			    			
 			    			floatArray[finalI] = Graph.Random();
-			    			String newValueR = floatArray[finalI] + "";
+			    			String newValueR = String.format("%.2f", floatArray[finalI]);
 			    			meterData.setText(newValueR);
 			    			num = Integer.toString(finalI);
 			    			series.getData().add(new XYChart.Data<String, Number>(num , floatArray[finalI]));
