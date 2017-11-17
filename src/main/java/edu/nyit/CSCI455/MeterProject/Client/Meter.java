@@ -83,9 +83,6 @@ public class Meter {
 	}
 	
 	public String KafCoRead(){
-		/*
-		 * TODO: Define readThread 
-		 */
 		if (!serialPort.isOpened()){
 			try{
 				serialPort.openPort();

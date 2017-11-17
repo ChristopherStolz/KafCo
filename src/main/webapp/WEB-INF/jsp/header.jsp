@@ -28,14 +28,14 @@
 			<a href = "#" class = "dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class = "caret"></span></a>
 			<ul id = "login-dp" class = "dropdown-menu">
 			<div class = "col-xs-12">
-				<form class = "form" role = "form" method = "post" action = "login" accept-charset="UTF-8" id = "login-nav">
+				<form role = "form" method = "POST" action = "doLogin" accept-charset="UTF-8" id = "login-nav">
 					<div class = "form-group">
 						<label class="sr-only" for="inputEmail"> Email Address </label>
-						<input type = "email" class = "form-control" id = "inputEmail" placeholder = "Email Address" required>
+						<input name = "email" type = "email" class = "form-control" id = "inputEmail" placeholder = "Email Address" required>
 					</div>
 					<div class = "form-group">
 						<label class ="sr-only" for="inputPassword"> Password </label>
-						<input type = "password" class = "form-control" id = "inputPassword" placeholder = "Password" required>
+						<input name = "password" type = "password" class = "form-control" id = "inputPassword" placeholder = "Password" required>
 					</div>
 					<div class = "form-group">
 						<button type="submit" class = "btn btn-primary btn-block">Sign In</button>

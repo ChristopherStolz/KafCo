@@ -14,32 +14,35 @@ public class User{
 	private String firstName;
 	private String lastName;
 	private Date dateAdded;
-	private String userName;
+	private String email;
 	private String password;
 	private Boolean admin;
 	
-	public User (String first, String last, String userName, String password){
+	public User (){
+		
+	}
+	public User (String first, String last, String email, String password){
 		firstName = first;
 		lastName = last;
-		this.userName = userName;
+		this.email = email;
 		this.password = password;
 		admin = false;
 		dateAdded = new Date();
 		Id = this.lastName + this.firstName + dateAdded;
 	}
-	public User (String first, String last, String userName, String password, boolean admin){
+	public User (String first, String last, String email, String password, boolean admin){
 		firstName = first;
 		lastName = last;
-		this.userName = userName;
+		this.email = email;
 		this.password = password;
 		this.admin = admin;
 		dateAdded = new Date();
 		Id = this.lastName + this.firstName + dateAdded;
 	}
-	public User (String first, String last, String userName, String password, boolean admin, Date added){
+	public User (String first, String last, String email, String password, boolean admin, Date added){
 		firstName = first;
 		lastName = last;
-		this.userName = userName;
+		this.email = email;
 		this.password = password;
 		this.admin = admin;
 		dateAdded = added;
@@ -63,11 +66,11 @@ public class User{
 	public void setDateAdded(Date dateAdded) {
 		this.dateAdded = dateAdded;
 	}
-	public String getUserName() {
-		return userName;
+	public String getEmail() {
+		return email;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setemail(String email) {
+		this.email = email;
 	}
 	public String getPassword() {
 		return password;

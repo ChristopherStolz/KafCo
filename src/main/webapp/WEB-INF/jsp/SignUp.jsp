@@ -14,20 +14,22 @@
 	<div class = "col-sm-2">
 	</div>
 	<div class = "col-sm-8 well">
-		<div class = "form" role = "form" method = "post" action = "activate" accept-charset="UTF-8" id = "activate">
+		<form role = "form" method = "POST" action = "doRegister" accept-charset="UTF-8" id = "activate">
 			<div class = "row">
 			<div class = "col-sm-1">
 			</div>
 				<div class = "col-sm-5">
 					<div class = "form-group">
 						<label class = "control-label" for = "first"> First Name </label>
-						<input type = "text" class = "form-control" id = "first" placeholder = "First" required readonly>
+						<input name = "first" type = "text" class = "form-control" id = "first" 
+							placeholder = "First" required >
 					</div>
 				</div>
 				<div class = "col-sm-5">
 					<div class = "form-group">
 						<label class = "control-label" for = "last"> Last Name </label>
-						<input type = "text" class = "form-control" id = "last" placeholder = "Last" required readonly>
+						<input name = "last" type = "text" class = "form-control" id = "last" 
+							placeholder = "Last" required >
 					</div>
 				</div>
 			</div>
@@ -36,7 +38,8 @@
 				<div class = "col-sm-10">
 					<div class = "form-group">
 					<label class = "control-label" for = "email"> Email Address </label>
-					<input type = "email" class = "form-control" id = "last" placeholder = "Email" required readonly>
+					<input name = "email" type = "email" class = "form-control" id = "last" 
+						placeholder = "Email" required >
 					</div>
 				</div>
 			</div>
@@ -45,13 +48,15 @@
 				<div class = "col-sm-5">
 					<div class = "form-group">
 						<label class = "control-label" for = "password"> Password </label>
-						<input type = "password" class = "form-control" id = "password" placeholder = "Password" required>
+						<input name = "password" type = "password" class = "form-control" id = "password" 
+							placeholder = "Password" required>
 					</div>
 				</div>
 				<div class = "col-sm-5">
 										<div class = "form-group">
 						<label class = "control-label" for = "password2"> Confirm Password </label>
-						<input type = "password" class = "form-control" id = "password2" placeholder = "Password" required>
+						<input type = "password" class = "form-control" id = "password2" 
+							placeholder = "Password" required>
 					</div>
 				</div>
 			</div>
@@ -63,7 +68,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
   </div>
   </div>

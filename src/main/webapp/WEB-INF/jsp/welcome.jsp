@@ -8,6 +8,7 @@
     <div class = "col-sm-1"></div>
 		<div class = "col-sm-10 well">
 			<h1 class = "text-center">Welcome</h1>
+			<h2 class = "text-center">${user.email}</h2>
 		</div>
 	</div>
 </div>
