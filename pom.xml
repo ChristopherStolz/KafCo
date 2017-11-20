@@ -6,7 +6,7 @@
 	<groupId>edu.nyit.CSCI455</groupId>
 	<artifactId>MeterProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>MeterProject</name>
 	<description>Demo project for Spring Boot</description>

@@ -1,14 +1,19 @@
 package edu.nyit.CSCI455.MeterProject.Server;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.nyit.CSCI455.MeterProject.Data.DataRun;
+import edu.nyit.CSCI455.MeterProject.Data.DataService;
 import edu.nyit.CSCI455.MeterProject.Data.User;
 import edu.nyit.CSCI455.MeterProject.Data.UserService;
 
@@ -18,6 +23,9 @@ public class WebController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	DataService dataService;
 	
 	@ModelAttribute("user")
 	public User setUpUserForm(){
@@ -67,7 +75,7 @@ public class WebController {
 		user = new User();
 		return "success";
 	}
-/*	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	public String formPost(@ModelAttribute("user") User user,
 						   @RequestParam("email") String email,
 						   @RequestParam("password") String password){
@@ -76,9 +84,14 @@ public class WebController {
 			return "welcome";
 		}
 		return "welcome";
-	}*/
+	}
 	@RequestMapping(value = "/login")
 	public String login(){
 		return "login";
+	}
+	@RequestMapping(value = "/results")
+	public String results(@ModelAttribute("results") ArrayList<DataRun> results){
+		results = (ArrayList<DataRun>) dataService.findAll();
+		return "results";
 	}
 }

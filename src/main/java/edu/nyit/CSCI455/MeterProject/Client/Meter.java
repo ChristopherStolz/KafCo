@@ -3,17 +3,9 @@ package edu.nyit.CSCI455.MeterProject.Client;
 import edu.nyit.CSCI455.MeterProject.Data.*;
 
 import jssc.SerialPort;
-import jssc.SerialPortEvent;
-import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
 import jssc.SerialPortList;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Random;
 
@@ -55,7 +47,7 @@ public class Meter {
 			 * If there are no serial devices connected we error;
 			 * TODO: Robust error behavior for GUI
 			 */
-			System.out.println("No serial device connected.");
+			System.err.println("No serial device connected.");
 		}
 		
 		/*
@@ -77,7 +69,7 @@ public class Meter {
 		serialPort.setFlowControlMode(serialPort.FLOWCONTROL_NONE);
 
 		} catch (SerialPortException e) {
-			System.out.println("Serial device initialization failed: " + e);
+			System.err.println("Serial device initialization failed: " + e);
 		}
 		
 	}
@@ -90,7 +82,7 @@ public class Meter {
 			try{
 				serialPort.openPort();
 			} catch (SerialPortException e){
-				System.out.println("Error opening port in KafCoRead(): " + e);
+				System.err.println("Error opening port in KafCoRead(): " + e);
 			}
 		}
 		String result = new String();

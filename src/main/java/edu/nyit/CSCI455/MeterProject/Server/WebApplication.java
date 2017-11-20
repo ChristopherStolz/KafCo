@@ -29,6 +29,10 @@ public class WebApplication extends SpringBootServletInitializer{
 		return new UserService();
 	}
 	@Bean
+	public DataService dataService(){
+		return new DataService();
+	}
+	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder(){
 		return new BCryptPasswordEncoder();
 	}

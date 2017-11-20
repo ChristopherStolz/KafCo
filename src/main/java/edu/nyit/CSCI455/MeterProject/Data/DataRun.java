@@ -5,8 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.ListIterator;
 
 @Document(collection = "MeterData")
 public class DataRun{
@@ -72,5 +70,10 @@ public class DataRun{
 	public void setData(ArrayList<String> data) {
 		this.data = data;
 	}
-
+	public void setTimeOffset(int offset){
+		timeOffset = offset;
+	}
+	public int getTimeOffset(){
+		return timeOffset;
+	}
 }
