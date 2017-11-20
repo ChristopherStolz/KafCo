@@ -8,11 +8,11 @@
   			<div class = "well col-xs-10">
 				<form action = "doLogin" method = "POST"  role = "form" accept-charset="UTF-8" id = "login-nav">
 					<div class = "form-group">
-						<label class="sr-only" for="inputEmail"> Email Address </label>
+						<label class="sr-only" for="email"> Email Address </label>
 						<input type = "email" class = "form-control" name = "email" id = "email" placeholder = "Email Address" required>
 					</div>
 					<div class = "form-group">
-						<label class ="sr-only" for="inputPassword"> Password </label>
+						<label class ="sr-only" for="password"> Password </label>
 						<input type = "password" class = "form-control" name = "password" id = "password" placeholder = "Password" required>
 					</div>
 					<div class = "form-group">

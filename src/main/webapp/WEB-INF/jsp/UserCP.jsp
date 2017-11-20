@@ -4,7 +4,7 @@
 <body>
 <div class = "container-fluid">
   <jsp:include page = "header.jsp" />
-  
+  ${user.email}
   </div>
 </body>
 </html>

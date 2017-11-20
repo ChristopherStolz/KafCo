@@ -1,6 +1,8 @@
 package edu.nyit.CSCI455.MeterProject.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,16 @@ public class UserService{
 		userRepository.save(user);
 	}
 	
+	public User findLoggedInUser(){
+		Object userDetails = SecurityContextHolder
+								.getContext()
+								.getAuthentication()
+								.getDetails();
+		if (userDetails instanceof UserDetails){
+			return findByEmail(((UserDetails) userDetails).getUsername());
+		}
+		return null;
+	}
 	public User findByEmail (String email){
 		return userRepository.findByEmail(email);
 	}

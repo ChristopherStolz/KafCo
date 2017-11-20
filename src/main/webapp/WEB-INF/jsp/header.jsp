@@ -21,9 +21,9 @@
 	</ul>
       <c:if test="${sessionScope.user.email != null}">
 	  <ul class = "nav navbar-nav navbar-right">
-        <li><a href = "#">View Reports</a></li>
-		<li><a href = "#">User Control Panel</a></li>
-		<li><a href = "#">Admin Control Panel</a></li>
+        <li><a href = "/results">View Reports</a></li>
+		<li><a href = "/user/cp">User Control Panel</a></li>
+		<li><a href = "/admin/cp">Admin Control Panel</a></li>
 		</ul>
       </c:if>
 	<c:if test="${sessionScope.user.email == null}">

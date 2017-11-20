@@ -36,6 +36,7 @@ public class WebApplication extends SpringBootServletInitializer{
 	public BCryptPasswordEncoder bCryptPasswordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
+	
 	AnnotationConfigApplicationContext ctx =
             new AnnotationConfigApplicationContext(DatabaseConfiguration.class);
 	

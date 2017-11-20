@@ -17,20 +17,23 @@ public class WebSecuirtyConfig extends WebSecurityConfigurerAdapter{
 	UserDetailsService userService;
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@Override
 	protected void configure (HttpSecurity http) throws Exception{
 		http
 			.authorizeRequests().
-			antMatchers("/", "/welcome", "/doSignUp", "/doLogin").permitAll();
+			antMatchers("/", "/welcome", "/signup", "/doSignUp", "/doLogin").permitAll();
 		http
 			.authorizeRequests()
-				.antMatchers("/admin/**").hasAuthority("Admin")
-				.antMatchers("/user/**").hasAuthority("User")
+				.antMatchers("/admincp").hasAuthority("Admin")
+				.antMatchers("/usercp", "/results", "/graph/**").hasAuthority("User")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
 					.loginPage("/login")
-					.defaultSuccessUrl("/welcome")
+						.usernameParameter("email")
+						.passwordParameter("password")
+					.loginProcessingUrl("/doLogin")
 					.permitAll()
 					.and()
 				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/doLogout"))
@@ -42,6 +45,8 @@ public class WebSecuirtyConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(bCryptPasswordEncoder);
+        auth
+        	.userDetailsService(userService)
+        	.passwordEncoder(bCryptPasswordEncoder);
     }
 }

@@ -29,6 +29,8 @@ public class WebController {
 	
 	@ModelAttribute("user")
 	public User setUpUserForm(){
+		User user = userService.findLoggedInUser();
+		if (user != null) return user;
 		return new User();
 	}
 	
@@ -52,9 +54,9 @@ public class WebController {
 	public String tutorial(ModelAndView modelAndView){
 		return "tutorial";
 	}
-	@RequestMapping("/user/cp")
+	@RequestMapping("/usercp")
 	public String usercp(ModelAndView modelAndView){
-		return "UserCP";
+		return "usercp";
 	}
 	@RequestMapping("/dataview")
 	public String dataview(ModelAndView modelAndView){
@@ -79,11 +81,11 @@ public class WebController {
 	public String formPost(@ModelAttribute("user") User user,
 						   @RequestParam("email") String email,
 						   @RequestParam("password") String password){
-		if(userService.checkUser(email, password)){
+		//if(userService.checkUser(email, password)){
 			user = userService.findByEmail(email);
 			return "welcome";
-		}
-		return "welcome";
+		//}
+		//return "test";
 	}
 	@RequestMapping(value = "/login")
 	public String login(){
