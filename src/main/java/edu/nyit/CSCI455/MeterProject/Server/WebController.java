@@ -30,10 +30,20 @@ public class WebController {
 	@ModelAttribute("user")
 	public User setUpUserForm(){
 		User user = userService.findLoggedInUser();
-		if (user != null) return user;
-		return new User();
+		return (user != null) ? user : new User();
+	}
+	@ModelAttribute("results")
+	public ArrayList<DataRun> setUpResults(){
+		return new ArrayList(dataService.findAll());
 	}
 	
+	@RequestMapping("/test")
+	public String test(ModelAndView modelAndView,
+						@ModelAttribute("user") User user){
+		user = setUpUserForm();
+		modelAndView.addObject("user", user);
+		return "test";
+	}
 	@RequestMapping("/welcome")
 	public String welcome(ModelAndView modelAndView){
 		return "welcome";
@@ -77,23 +87,16 @@ public class WebController {
 		user = new User();
 		return "success";
 	}
-	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-	public String formPost(@ModelAttribute("user") User user,
-						   @RequestParam("email") String email,
-						   @RequestParam("password") String password){
-		//if(userService.checkUser(email, password)){
-			user = userService.findByEmail(email);
-			return "welcome";
-		//}
-		//return "test";
-	}
+	
 	@RequestMapping(value = "/login")
 	public String login(){
 		return "login";
 	}
+	
 	@RequestMapping(value = "/results")
-	public String results(@ModelAttribute("results") ArrayList<DataRun> results){
-		results = (ArrayList<DataRun>) dataService.findAll();
+	public String results(ModelAndView modelAndView){
+		ArrayList<DataRun> results = setUpResults();
+		modelAndView.addObject("results", results.toArray());
 		return "results";
 	}
 }

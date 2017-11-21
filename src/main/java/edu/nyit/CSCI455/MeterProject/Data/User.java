@@ -21,7 +21,6 @@ public class User{
 	public User(){
 		
 	}
-	
 	public User (String first, String last, String email, String password){
 		firstName = first;
 		lastName = last;
