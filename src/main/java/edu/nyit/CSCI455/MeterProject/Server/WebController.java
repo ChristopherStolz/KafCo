@@ -2,12 +2,14 @@ package edu.nyit.CSCI455.MeterProject.Server;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +20,7 @@ import edu.nyit.CSCI455.MeterProject.Data.User;
 import edu.nyit.CSCI455.MeterProject.Data.UserService;
 
 @Controller
-@SessionAttributes("user")
+@SessionAttributes({"user"})
 public class WebController {
 	
 	@Autowired
@@ -32,20 +34,38 @@ public class WebController {
 		User user = userService.findLoggedInUser();
 		return (user != null) ? user : new User();
 	}
+	
 	@ModelAttribute("results")
 	public ArrayList<DataRun> setUpResults(){
-		return new ArrayList(dataService.findAll());
+		return new ArrayList<DataRun>(dataService.findAll());
 	}
 	
-	@RequestMapping("/test")
-	public String test(ModelAndView modelAndView,
-						@ModelAttribute("user") User user){
-		user = setUpUserForm();
-		modelAndView.addObject("user", user);
-		return "test";
+//	@ModelAttribute("result")
+//	public DataRun getResult(String id){
+//		DataRun data = dataService.findById(id);
+//		return (data != null) ? data : new DataRun();
+//	}
+	
+	@RequestMapping("/")
+	public String base(ModelAndView modelAndView,
+						@ModelAttribute User user){
+		User getuser = this.setUpUserForm();
+		user.setDateAdded(getuser.getDateAdded());
+		user.setEmail(getuser.getEmail());
+		user.setAdmin(getuser.getAdmin());
+		user.setFirstName(getuser.getFirstName());
+		user.setLastName(getuser.getLastName());
+		return "welcome";
 	}
 	@RequestMapping("/welcome")
-	public String welcome(ModelAndView modelAndView){
+	public String welcome(ModelAndView modelAndView,
+							@ModelAttribute User user){
+		User getuser = this.setUpUserForm();
+		user.setDateAdded(getuser.getDateAdded());
+		user.setEmail(getuser.getEmail());
+		user.setAdmin(getuser.getAdmin());
+		user.setFirstName(getuser.getFirstName());
+		user.setLastName(getuser.getLastName());
 		return "welcome";
 	}	
 	@RequestMapping("/contact")
@@ -98,5 +118,32 @@ public class WebController {
 		ArrayList<DataRun> results = setUpResults();
 		modelAndView.addObject("results", results.toArray());
 		return "results";
+	}
+	
+	@RequestMapping(value = "/test")
+	public String test(ModelAndView modelAndView, 
+						HttpServletRequest request,
+						@ModelAttribute ("result") DataRun result){
+		String Id = request.getQueryString();
+		Id = Id.replaceAll("%20", " ");
+		DataRun data = dataService.findById(Id);
+		result.setData(data.getData());
+		result.setDate(data.getDate());
+		result.setMeterName(data.getMeterName());
+		result.setId(data.getId());
+		result.setTimeOffset(data.getTimeOffset());
+		return "test";
+	}
+	
+	@RequestMapping(value = "/graph")
+	public String graph(ModelAndView modelAndView, 
+						HttpServletRequest request){
+		String Id = request.getQueryString();
+		Id = Id.replaceAll("%20", " ");
+		//DataRun result = getResult(Id);
+		//ArrayList<String> data = getData(result);
+		//modelAndView.addObject("result", result);
+		//modelAndView.addObject("data", data);
+		return Id;
 	}
 }

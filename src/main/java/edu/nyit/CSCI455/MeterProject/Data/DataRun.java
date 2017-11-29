@@ -10,7 +10,7 @@ import java.util.Date;
 public class DataRun{
 
 	@Id
-	public String id;
+	private String id;
 
 	private String date;
 	private String meterName;
@@ -29,6 +29,14 @@ public class DataRun{
 		date = dateTime; // TODO: cut off the time before storing.
 		data = new ArrayList<String>();
 	}
+	
+	public DataRun(DataRun old){
+		this.date = old.getDate();
+		this.meterName = old.getMeterName();
+		this.timeOffset = old.getTimeOffset();
+		this.id = old.getId();
+		this.data = old.getData();
+	}
 
 	public boolean writeData(String dataObject){
 		data.add(dataObject);
@@ -36,10 +44,6 @@ public class DataRun{
 	}
 
 	public ArrayList<String> getData (){
-		/*
-		 * TODO: Define more robust behavior.
-		 * Currently returns the list raw
-		 */
 		return data;
 	}
 	

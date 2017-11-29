@@ -16,4 +16,5 @@ public interface DataRepository extends MongoRepository<DataRun, String>{
  * Update
  */
 	public List<DataRun> findAll(); 
+	public DataRun findByid(String id);
 }

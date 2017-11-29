@@ -14,4 +14,7 @@ public class DataService {
 	public List<DataRun> findAll(){
 		return dataRepository.findAll();
 	}
+	public DataRun findById(String Id){
+		return dataRepository.findByid(Id);
+	}
 }
