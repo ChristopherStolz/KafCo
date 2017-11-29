@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -120,8 +121,8 @@ public class WebController {
 		return "results";
 	}
 	
-	@RequestMapping(value = "/test")
-	public String test(ModelAndView modelAndView, 
+	@RequestMapping(value = "/graph")
+	public String graph(ModelAndView modelAndView, 
 						HttpServletRequest request,
 						@ModelAttribute ("result") DataRun result){
 		String Id = request.getQueryString();
@@ -132,18 +133,31 @@ public class WebController {
 		result.setMeterName(data.getMeterName());
 		result.setId(data.getId());
 		result.setTimeOffset(data.getTimeOffset());
-		return "test";
+		return "graph";
 	}
-	
-	@RequestMapping(value = "/graph")
-	public String graph(ModelAndView modelAndView, 
-						HttpServletRequest request){
-		String Id = request.getQueryString();
-		Id = Id.replaceAll("%20", " ");
-		//DataRun result = getResult(Id);
-		//ArrayList<String> data = getData(result);
-		//modelAndView.addObject("result", result);
-		//modelAndView.addObject("data", data);
-		return Id;
+	@PostMapping("/updatePassword")
+	public String updatePassword(ModelAndView modelAndView,
+								 @ModelAttribute("user") User user,
+								 @RequestParam("current-password") String current,
+								 @RequestParam("password") String password){
+		boolean matches = (userService.checkUser(user.getEmail(), current)) ?
+				true : false;
+		if(matches){
+			user.setPassword(password);
+			userService.save(user);
+		}
+		return (matches) ? "updated" : "pwfail";
+	}
+	@PostMapping("updateUser")
+	public String updateUser(ModelAndView modelAndView,
+							 @ModelAttribute("user") User user,
+							 @RequestParam("first") String first,
+							 @RequestParam("last") String last,
+							 @RequestParam("email") String email){
+		user.setFirstName(first);
+		user.setLastName(last);
+		user.setEmail(email);
+		userService.save(user);
+		return "updated";
 	}
 }

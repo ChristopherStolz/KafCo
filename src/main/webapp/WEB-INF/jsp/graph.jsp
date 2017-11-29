@@ -10,13 +10,6 @@
 	<body>
 		<div class = "container-fluid">
 		<jsp:include page = "header.jsp" />
-		<div class = "row">
-		<c:out value = "${data}" default = "oops" />
-		
-		<c:forEach items = "${data}" var = "current">
-			<c:out value = "${current}" />
-		</c:forEach>
-		</div>
 		<div class = "col-sm-1"></div>
 		<div class = "col-sm-10 well">
 		<canvas id = "myChart"></canvas></div>
@@ -27,7 +20,13 @@
 				type: 'line',
 				data: {
 					//Time (milliseconds, calculated from offset)
-					labels: [1,2,3,4,5,4,3,2,1],
+					labels:[
+					<c:set var = "total" value = "0" />
+					<c:forEach items = "${result.data}" var = "current" varStatus = "loop">
+						<c:out value = "${total}" /> ,
+						<c:set var = "total" value = "${total + result.timeOffset}" /> 
+					</c:forEach>
+					],
 					datasets:[{
 						//Actual data from the object
 						data:[
@@ -45,7 +44,7 @@
 					title:{
 						display:true,
 						//
-						text: 'display something please'
+						text: '<c:out value = "${result.id}" />'
 					}
 				}
 			});

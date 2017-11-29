@@ -16,14 +16,17 @@
     <div class = "container-fluid">
     <a class = "navbar-brand" href= "/about">KafCo</a>
   	<ul class = "nav navbar-nav">
-  		<li><a href="/welcome">Home</a></li>
-      <li><a href="/contact">Contact us</a></li>
+  		<li><a href="/welcome"><span class = "glyphicon glyphicon-home"></span></a></li>
+      <li><a href="/contact"><span class = "glyphicon glyphicon-envelope"></span> Contact us</a></li>
 	</ul>
       <c:if test="${sessionScope.user.email != null}">
 	  <ul class = "nav navbar-nav navbar-right">
-        <li><a href = "/results">View Reports</a></li>
-		<li><a href = "/user/cp">User Control Panel</a></li>
-		<li><a href = "/admin/cp">Admin Control Panel</a></li>
+        <li><a href = "/results"><span class="glyphicon glyphicon-folder-open"> </span>&nbsp View Reports</a></li>
+		<li><a href = "/usercp"><span class="glyphicon glyphicon-user"> </span> User Control Panel</a></li>
+		<c:if test = "${sessionScope.user.admin}"><li><a href = "/admincp">
+			<span class="glyphicon glyphicon-star-empty"></span>
+			Admin Control Panel</a></li></c:if>
+		<li><a href = "/doLogout"><span class="glyphicon glyphicon-log-out"> </span></a></li>
 		</ul>
       </c:if>
 	<c:if test="${sessionScope.user.email == null}">

@@ -22,11 +22,20 @@ public class WebSecuirtyConfig extends WebSecurityConfigurerAdapter{
 	protected void configure (HttpSecurity http) throws Exception{
 		http
 			.authorizeRequests().
-			antMatchers("/", "/welcome", "/signup", "/doSignUp", "/doLogin").permitAll();
+			antMatchers("/", 
+					    "/welcome", 
+					    "/signup", 
+					    "/doSignUp", 
+					    "/doLogin").permitAll();
 		http
 			.authorizeRequests()
 				.antMatchers("/admincp").hasAuthority("Admin")
-				.antMatchers("/graph", "/usercp", "/results", "/graph/**", "/test").hasAuthority("User")
+				.antMatchers("/graph", 
+							 "/usercp", 
+							 "/results", 
+							 "/test", 
+							 "/updatePassword",
+							 "/updateUser").hasAuthority("User")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
