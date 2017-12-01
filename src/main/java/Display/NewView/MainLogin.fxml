@@ -10,16 +10,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Display.NewView.MainLoginController">
    <center>
-      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="581.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="581.0" style="-fx-background-color: linear-gradient(to bottom, #1a2a6c, #b21f1f, #fdbb2d);" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="393.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="600.0">
                      <children>
-                        <Label fx:id="lblWelcome" text="Welcome" />
+                        <Label fx:id="lblWelcome" prefHeight="60.0" prefWidth="129.0" text="Welcome">
+                           <font>
+                              <Font name="Rage Italic" size="39.0" />
+                           </font></Label>
                      </children>
                   </HBox>
                   <GridPane alignment="CENTER" prefHeight="60.0" prefWidth="393.0">

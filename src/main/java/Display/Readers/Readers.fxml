@@ -25,7 +25,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Display.Readers.ReaderController">
+<BorderPane prefHeight="600.0" prefWidth="2000.0" style="-fx-background-color: linear-gradient(to bottom, #1a2a6c, #b21f1f, #fdbb2d);" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Display.Readers.ReaderController">
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -34,7 +34,7 @@
       </HBox>
    </top>
    <center>
-      <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.5" style="-fx-background-color: linear-gradient(to bottom, #1a2a6c, #b21f1f, #fdbb2d);" BorderPane.alignment="CENTER">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -54,19 +54,19 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label text="Choose ComPort" />
-                                          <Label text="Time Interval in MillieSeconds" GridPane.rowIndex="1" />
-                                          <ChoiceBox fx:id="comPortBox" prefWidth="150.0" GridPane.columnIndex="1" />
-                                          <ChoiceBox fx:id="timeIntBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="Choose ComPort" textFill="#eee7e7" />
+                                          <Label text="Time Interval in MillieSeconds" textFill="#eee7e7" GridPane.rowIndex="1" />
+                                          <ChoiceBox fx:id="comPortBox" prefWidth="150.0" style="-fx-background-color: #35373a;" GridPane.columnIndex="1" />
+                                          <ChoiceBox fx:id="timeIntBox" prefWidth="150.0" style="-fx-background-color: #35373a;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>
                               </VBox>
-                              <Button mnemonicParsing="false" prefWidth="80.0" text="Connect">
+                              <Button mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #35373a;" text="Connect" textFill="#eee7e7">
                                  <HBox.margin>
                                     <Insets top="3.0" />
                                  </HBox.margin></Button>
-                              <Button mnemonicParsing="false" onAction="#chartBtn" prefWidth="80.0" text="Graph">
+                              <Button mnemonicParsing="false" onAction="#chartBtn" prefWidth="80.0" style="-fx-background-color: #35373a;" text="Graph" textFill="#eee7e7">
                                  <HBox.margin>
                                     <Insets left="10.0" top="3.0" />
                                  </HBox.margin></Button>
@@ -83,9 +83,9 @@
                               </ImageView>
                               <Line fx:id="meterLine" endX="100.0" layoutX="346.0" layoutY="279.0" rotate="90.0" scaleX="2.0" startX="-100.0" strokeWidth="3.0" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fa3c3c" height="208.0" layoutX="83.0" layoutY="278.0" stroke="BLACK" strokeType="INSIDE" width="526.0" />
-                              <Button layoutX="138.0" layoutY="443.0" mnemonicParsing="false" text="Hold" />
-                              <Button layoutX="316.0" layoutY="443.0" mnemonicParsing="false" text="Max/Min" />
-                              <Button layoutX="515.0" layoutY="443.0" mnemonicParsing="false" text="Button" />
+                              <Button layoutX="138.0" layoutY="443.0" mnemonicParsing="false" style="-fx-background-color: #35373a;" text="Hold" textFill="#eee7e7" />
+                              <Button layoutX="316.0" layoutY="443.0" mnemonicParsing="false" style="-fx-background-color: #35373a;" text="Max/Min" textFill="#eee7e7" />
+                              <Button layoutX="515.0" layoutY="443.0" mnemonicParsing="false" style="-fx-background-color: #35373a;" text="Button" textFill="#eee7e7" />
                               <Circle fx:id="colorDect" fill="DODGERBLUE" layoutX="344.0" layoutY="280.0" radius="84.0" stroke="BLACK" strokeType="INSIDE">
                                  <effect>
                                     <Blend />

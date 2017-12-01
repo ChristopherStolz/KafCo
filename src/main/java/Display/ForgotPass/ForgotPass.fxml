@@ -14,15 +14,15 @@
 
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Display.ForgotPass.ForgotHome">
    <center>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom, #1a2a6c, #b21f1f, #fdbb2d);" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="400.0" prefWidth="390.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="35.0" prefWidth="441.0">
+                  <HBox alignment="CENTER" prefHeight="35.0" prefWidth="402.0">
                      <children>
-                        <Label text="Please Enter Email Address">
+                        <Label prefHeight="40.0" prefWidth="270.0" text="Please Enter Email Address">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Rage Italic" size="25.0" />
                            </font>
                         </Label>
                      </children>
@@ -51,8 +51,8 @@
                   </GridPane>
                   <HBox alignment="CENTER" prefHeight="32.0" prefWidth="388.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="120.0" text="Send" />
-                        <Button mnemonicParsing="false" onAction="#goHome" prefWidth="120.0" text="Cancel" />
+                        <Button mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #35373a;" text="Send" textFill="#f8f7f7" />
+                        <Button mnemonicParsing="false" onAction="#goHome" prefWidth="120.0" style="-fx-background-color: #35373a;" text="Cancel" textFill="#f8f7f7" />
                      </children>
                      <padding>
                         <Insets left="40.0" />

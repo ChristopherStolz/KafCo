@@ -59,7 +59,8 @@ public class ReaderController {
 		comPortBox.setItems(comPortList);
 		timeIntBox.setValue("100");
 		timeIntBox.setItems(timeIntList);
-
+		comPortBox.setStyle("-fx-prompt-text-fill: #eee7e7");
+		timeIntBox.setStyle("-fx-prompt-text-fill: #eee7e7");
 
 	}
 
