@@ -32,8 +32,8 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="UserName" textFill="#f8f7f7" />
-                        <Label prefHeight="17.0" prefWidth="100.0" text="Password" textFill="#f8f7f7" GridPane.rowIndex="1" />
+                        <Label text="UserName" />
+                        <Label prefHeight="17.0" prefWidth="100.0" text="Password" GridPane.rowIndex="1" />
                         <TextField fx:id="txtUserName" prefHeight="25.0" prefWidth="251.0" promptText="UserName" style="-fx-background-radius: 10;" GridPane.columnIndex="1" />
                         <TextField fx:id="txtPassword" promptText="Pasword" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
