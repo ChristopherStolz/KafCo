@@ -36,6 +36,7 @@ public class ReaderController {
 
 	ObservableList<String> timeIntList = FXCollections
 			.observableArrayList("100","200","300","400","500","600","700","800","900","1000");
+	
 
 
 	//brings you back to the login screen
@@ -51,6 +52,15 @@ public class ReaderController {
 
 	@FXML
 	private ChoiceBox timeIntBox;
+	
+	
+	@FXML
+	private TextField lowerG;
+	
+	@FXML
+	private TextField maximumG;
+	
+	
 
 	//fills ChoiceBoxs and sets there initial value
 	@FXML 
@@ -119,7 +129,10 @@ public class ReaderController {
 							series.getData().add(new XYChart.Data<String, Number>(num , floatArray[finalI]));
 							//fill graph
 							meterLine.setRotate((179.9/580)*floatArray[finalI]);//converts data into degrees
-							if (floatArray[finalI] < 60 || floatArray[finalI] > 480){
+							int newLower = Integer.parseInt(lowerG.getText());
+							int newMax = Integer.parseInt(maximumG.getText());
+							
+							if (floatArray[finalI] < newLower || floatArray[finalI] > newMax){
 								colorDect.setFill(Color.RED);
 							}
 							else{

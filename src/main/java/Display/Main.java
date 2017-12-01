@@ -17,8 +17,7 @@ import javafx.stage.Stage;
 public class Main  extends Application{
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
-	private static AnchorPane newMainLayout;
-	private static SplitPane SplitMainLayout;
+
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
