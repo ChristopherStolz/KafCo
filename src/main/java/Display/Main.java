@@ -23,7 +23,7 @@ public class Main  extends Application{
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Kafco");//name of doc.
+		this.primaryStage.setTitle("DIYW");//name of doc.
 		
 		showMainView();//calls showMainView (so that it will display)
 		showMainLogin();//Calls ShowMainLogin (so that it will display)
