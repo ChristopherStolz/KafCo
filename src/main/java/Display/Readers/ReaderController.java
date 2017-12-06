@@ -7,6 +7,7 @@ import java.util.Random;
 
 
 import Display.Main;
+import edu.nyit.CSCI455.MeterProject.Client.Meter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,7 +112,7 @@ public class ReaderController {
 		float[] floatArray = new float[101];
 		AreaChart.getData().add(series);//graphs point
 
-
+		Meter meter = new Meter("meter-", 100); //Instantiates a meter
 
 		Task task = new Task<Void>() {
 			@Override
@@ -122,13 +123,15 @@ public class ReaderController {
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {			        			    			
-							floatArray[finalI] = Graph.Random();
-							String newValueR = String.format("%.2f", floatArray[finalI]);
+							//floatArray[finalI] = Graph.Random();
+							String result = meter.KafCoRead();
+							Float floatResult = Float.valueOf(result);
+							String newValueR = String.format("%.2f", floatResult);
 							meterData.setText(newValueR);
 							num = Integer.toString(finalI);
-							series.getData().add(new XYChart.Data<String, Number>(num , floatArray[finalI]));
+							series.getData().add(new XYChart.Data<String, Number>(num , floatResult));
 							//fill graph
-							meterLine.setRotate((179.9/580)*floatArray[finalI]);//converts data into degrees
+							meterLine.setRotate((179.9/580)*floatResult);//converts data into degrees
 							int newLower = Integer.parseInt(lowerG.getText());
 							int newMax = Integer.parseInt(maximumG.getText());
 							
