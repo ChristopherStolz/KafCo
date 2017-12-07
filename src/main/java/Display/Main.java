@@ -4,7 +4,6 @@ package Display;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,13 +17,9 @@ import edu.nyit.CSCI455.MeterProject.Data.DataService;
 import edu.nyit.CSCI455.MeterProject.Data.UserRepository;
 import edu.nyit.CSCI455.MeterProject.Data.UserService;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 @SpringBootApplication
@@ -68,7 +63,6 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 		
 		
 	}
-		
 		//loads the main FXML doc and gives it a size
 		private void showMainView() throws IOException {
 			FXMLLoader loader = new FXMLLoader();
@@ -106,8 +100,6 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 		
 
 		public static void main(String[] args) {
-			SpringApplication app = new SpringApplication(Main.class);
-			app.setWebEnvironment(false);
 			launchApp(Main.class, MainView.class, args);
 		}
 }
