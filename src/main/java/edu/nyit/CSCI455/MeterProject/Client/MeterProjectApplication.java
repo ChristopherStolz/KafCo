@@ -23,21 +23,16 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 @SpringBootApplication
-public class MeterProjectApplication {
+public class MeterProjectApplication implements CommandLineRunner{
 	
 	@Autowired
 	DataRepository dataService;
 	@Autowired
 	UserRepository userService;
-	
-
-	
 	public static void main(String[] args){
 		SpringApplication.run(MeterProjectApplication.class, args);
-	
 	}
-	
-	/*@Override
+	@Override
 	public void run(String...args) throws Exception{
 		Meter meter = new Meter("meter", 100);
 		String result;
@@ -46,5 +41,5 @@ public class MeterProjectApplication {
 			System.out.println(result);
 		}
 		dataService.save(meter.getData());
-	}*/
+	}
 }

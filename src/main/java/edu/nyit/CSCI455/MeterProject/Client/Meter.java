@@ -85,7 +85,7 @@ public class Meter {
 				System.err.println("Error opening port in KafCoRead(): " + e);
 			}
 		}
-		String result = new String();
+		String result = null;
 		try{
 			serialPort.writeString(ZERO + ""); //KafCo device wants a ZERO before returning result (mode?)
 			while(result == null){

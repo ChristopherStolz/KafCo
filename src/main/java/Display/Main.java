@@ -3,7 +3,21 @@ package Display;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import Display.Main;
+import Display.NewView.MainView;
+import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
+
+import edu.nyit.CSCI455.MeterProject.Data.DataRepository;
+import edu.nyit.CSCI455.MeterProject.Data.DataService;
+import edu.nyit.CSCI455.MeterProject.Data.UserRepository;
+import edu.nyit.CSCI455.MeterProject.Data.UserService;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,8 +27,33 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
-public class Main  extends Application{
+@SpringBootApplication
+public class Main  extends AbstractJavaFxApplicationSupport{
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	DataRepository dataRepository;
+	
+	@Autowired
+	UserService userService;
+	
+	@Bean
+	public UserService userService(){
+		return new UserService();
+	}
+	
+	@Bean
+	public DataService dataService(){
+		return new DataService();
+	}
+	
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
+	
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
 
@@ -68,6 +107,8 @@ public class Main  extends Application{
 		
 
 		public static void main(String[] args) {
-			launch(args);
+			SpringApplication app = new SpringApplication(Main.class);
+			app.setWebEnvironment(false);
+			launchApp(Main.class, MainView.class, args);
 		}
 }
