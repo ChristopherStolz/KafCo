@@ -7,7 +7,6 @@ import java.util.Random;
 
 
 import Display.Main;
-import edu.nyit.CSCI455.MeterProject.Client.Meter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +17,7 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -95,9 +95,12 @@ public class ReaderController {
 
 	@FXML
 	private Circle colorDect;
+	
+	@FXML
+	private Button BtnStop;
 
-
-
+	
+	
 
 	static Random rand = new Random();
 
@@ -106,32 +109,32 @@ public class ReaderController {
 	//graphs all data and displays it in text box and updates meter
 	@FXML
 	private void chartBtn (ActionEvent event) throws InterruptedException{
-		XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
+		XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(); 
 		int selectedChoice = Integer.parseInt((String)timeIntBox.getSelectionModel().getSelectedItem());
 
 		float[] floatArray = new float[101];
 		AreaChart.getData().add(series);//graphs point
 
-		Meter meter = new Meter("meter-", 100); //Instantiates a meter
+
 
 		Task task = new Task<Void>() {
 			@Override
 			public Void call() throws Exception {
 				int i = 0;
+				
+				BtnStop.getOnAction();
 				while (true) {//loops until array is over
 					final int finalI = i;
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {			        			    			
-							//floatArray[finalI] = Graph.Random();
-							String result = meter.KafCoRead();
-							Float floatResult = Float.valueOf(result);
-							String newValueR = String.format("%.2f", floatResult);
+							floatArray[finalI] = Graph.Random();
+							String newValueR = String.format("%.2f", floatArray[finalI]);
 							meterData.setText(newValueR);
 							num = Integer.toString(finalI);
-							series.getData().add(new XYChart.Data<String, Number>(num , floatResult));
+							series.getData().add(new XYChart.Data<String, Number>(num , floatArray[finalI]));
 							//fill graph
-							meterLine.setRotate((179.9/580)*floatResult);//converts data into degrees
+							meterLine.setRotate((179.9/580)*floatArray[finalI]);//converts data into degrees
 							int newLower = Integer.parseInt(lowerG.getText());
 							int newMax = Integer.parseInt(maximumG.getText());
 							

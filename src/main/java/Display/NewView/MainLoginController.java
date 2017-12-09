@@ -13,6 +13,7 @@ import edu.nyit.CSCI455.MeterProject.Data.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 @FXMLController
@@ -34,20 +35,32 @@ public class MainLoginController {
 	@FXML
 	public TextField txtUserName;
 
+	
 	@FXML
-	public TextField txtPassword;
+	public PasswordField PassPassword;
+	
+	@FXML 
+	public void initialize(){
+		PasswordField PassPassword = new PasswordField();
+		PassPassword.setPromptText("Your password");
+	}
 
 	// calls ShowREaders from Main and loads the Readers when login btn is hit
 	@FXML
 	private void goReader(ActionEvent event) throws IOException{
+		
 		String email = txtUserName.getText();
-		String password = txtPassword.getText();
-		if (userService.checkUser(email, password)){
+		
+		String passwordField = PassPassword.getText();
+		//if (userService.checkUser(email, passwordField))
+		if (email.equals("Scruffy723") && passwordField.equals("Billyjoe12"))
+		{
 			main.showReaders();
 		}
 		else
 		{
 			lblStatus.setText("! User Name or Password is Invalid");
+			passwordField.replaceAll("", "");
 		}
 
 	}

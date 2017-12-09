@@ -84,7 +84,7 @@
                               <Line fx:id="meterLine" endX="100.0" layoutX="346.0" layoutY="279.0" rotate="90.0" scaleX="2.0" startX="-100.0" strokeWidth="3.0" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fa3c3c" height="208.0" layoutX="83.0" layoutY="278.0" stroke="BLACK" strokeType="INSIDE" width="526.0" />
                               <Button layoutX="138.0" layoutY="443.0" mnemonicParsing="false" style="-fx-background-color: #35373a;" text="Hold" textFill="#eee7e7" />
-                              <Button layoutX="515.0" layoutY="443.0" mnemonicParsing="false" style="-fx-background-color: #35373a;" text="Button" textFill="#eee7e7" />
+                              <Button fx:id="BtnStop" layoutX="515.0" layoutY="443.0" mnemonicParsing="false" style="-fx-background-color: #35373a;" text="Stop" textFill="#eee7e7" />
                               <Circle fx:id="colorDect" fill="DODGERBLUE" layoutX="344.0" layoutY="280.0" radius="84.0" stroke="BLACK" strokeType="INSIDE">
                                  <effect>
                                     <Blend />
