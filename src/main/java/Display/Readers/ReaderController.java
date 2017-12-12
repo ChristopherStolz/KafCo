@@ -69,12 +69,13 @@ public class ReaderController {
 	//fills ChoiceBoxs and sets there initial value
 	@FXML 
 	public void initialize(){
+		comPortBox.setStyle("-fx-prompt-text-fill: #eee7e7");
+		timeIntBox.setStyle("-fx-prompt-text-fill: #eee7e7");
 		comPortBox.setValue("1");
 		comPortBox.setItems(comPortList);
 		timeIntBox.setValue("100");
 		timeIntBox.setItems(timeIntList);
-		comPortBox.setStyle("-fx-prompt-text-fill: #eee7e7");
-		timeIntBox.setStyle("-fx-prompt-text-fill: #eee7e7");
+		
 
 	}
 
