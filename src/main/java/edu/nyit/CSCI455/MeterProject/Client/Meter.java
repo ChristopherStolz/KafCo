@@ -120,6 +120,14 @@ public class Meter {
 		return false;
 	}
 	
+	public void close(){
+		try {
+			serialPort.closePort();
+		} catch (SerialPortException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public DataRun getData (){
 		return myData;
 	}
