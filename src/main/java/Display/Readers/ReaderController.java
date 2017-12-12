@@ -166,6 +166,7 @@ public class ReaderController {
 					//sleeps after every point
 					Thread.sleep(selectedChoice);
 					if(StopBtn.isSelected()){
+						meter.close();
 						break;
 					}
 				}
