@@ -31,7 +31,7 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#Logout" text="Logout" />
+            <Button mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: #35373a;" text="Logout" textFill="#eee7e7" />
          </children>
       </HBox>
    </top>

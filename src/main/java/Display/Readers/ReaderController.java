@@ -154,7 +154,7 @@ public class ReaderController {
 							int newLower = Integer.parseInt(lowerG.getText());
 							int newMax = Integer.parseInt(maximumG.getText());
 							
-							if (floatArray[finalI] < newLower || floatArray[finalI] > newMax){
+							if (floatResult < newLower || floatResult > newMax){
 								colorDect.setFill(Color.RED);
 							}
 							else{
