@@ -53,14 +53,13 @@ public class MainLoginController {
 		
 		String passwordField = PassPassword.getText();
 		//if (userService.checkUser(email, passwordField))
-		if (email.equals("Scruffy723") && passwordField.equals("Billyjoe12"))
+		if (email.equals("") && passwordField.equals(""))
 		{
 			main.showReaders();
 		}
 		else
 		{
 			lblStatus.setText("! User Name or Password is Invalid");
-			passwordField.replaceAll("", "");
 		}
 
 	}

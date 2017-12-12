@@ -7,6 +7,7 @@ import java.util.Random;
 
 
 import Display.Main;
+import edu.nyit.CSCI455.MeterProject.Client.Meter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -97,44 +100,56 @@ public class ReaderController {
 	private Circle colorDect;
 	
 	@FXML
-	private Button BtnStop;
+	private ToggleButton StartBtn;
+	
+	
+	@FXML
+	private ToggleButton StopBtn;
+	
+	
+	
 
-	
-	
+
+
 
 	static Random rand = new Random();
 
 	String num;
 
+
 	//graphs all data and displays it in text box and updates meter
 	@FXML
-	private void chartBtn (ActionEvent event) throws InterruptedException{
-		XYChart.Series<String, Number> series = new XYChart.Series<String, Number>(); 
+	public void chartBtn (ActionEvent event) throws InterruptedException{
+		XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
 		int selectedChoice = Integer.parseInt((String)timeIntBox.getSelectionModel().getSelectedItem());
 
 		float[] floatArray = new float[101];
 		AreaChart.getData().add(series);//graphs point
 
+		Meter meter = new Meter("meter-", 100); //Instantiates a meter; 100 is where the time offset should go
 
-
-		Task task = new Task<Void>() {
+		
+		Task task = new Task<Boolean>() {
 			@Override
-			public Void call() throws Exception {
+			public Boolean call() throws Exception {
 				int i = 0;
 				
-				BtnStop.getOnAction();
-				while (true) {//loops until array is over
+				
+				boolean run = true;
+				while (run) {//loops until array is over
 					final int finalI = i;
 					Platform.runLater(new Runnable() {
 						@Override
 						public void run() {			        			    			
-							floatArray[finalI] = Graph.Random();
-							String newValueR = String.format("%.2f", floatArray[finalI]);
+							//floatArray[finalI] = Graph.Random();
+							String result = meter.KafCoRead();
+							Float floatResult = Float.valueOf(result);
+							String newValueR = String.format("%.2f", floatResult);
 							meterData.setText(newValueR);
 							num = Integer.toString(finalI);
-							series.getData().add(new XYChart.Data<String, Number>(num , floatArray[finalI]));
+							series.getData().add(new XYChart.Data<String, Number>(num , floatResult));
 							//fill graph
-							meterLine.setRotate((179.9/580)*floatArray[finalI]);//converts data into degrees
+							meterLine.setRotate((179.9/580)*floatResult);//converts data into degrees
 							int newLower = Integer.parseInt(lowerG.getText());
 							int newMax = Integer.parseInt(maximumG.getText());
 							
@@ -149,18 +164,27 @@ public class ReaderController {
 					i++;
 					//sleeps after every point
 					Thread.sleep(selectedChoice);
+					if(StopBtn.isSelected()){
+						break;
+					}
 				}
+				return run;
+				
+				
 			}
 		};
 		Thread th = new Thread(task);
 		th.setDaemon(true);
 		th.start();
-
+		
+		
 
 
 
 
 	}
+	
+
 	// new class for new thread that populates array 
 	static class Graph extends Task{
 
@@ -180,7 +204,6 @@ public class ReaderController {
 	}
 
 }
-
 
 
 
