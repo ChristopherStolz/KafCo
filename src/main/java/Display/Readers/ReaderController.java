@@ -35,7 +35,7 @@ public class ReaderController {
 
 	private Main main;
 
-
+	//the data that will fill the choice box
 	ObservableList<String> timeIntList = FXCollections
 			.observableArrayList("100","200","300","400","500","600","700","800","900","1000");
 	
@@ -150,7 +150,7 @@ public class ReaderController {
 							meterLine.setRotate((179.9/580)*floatResult);//converts data into degrees
 							int newLower = Integer.parseInt(lowerG.getText());
 							int newMax = Integer.parseInt(maximumG.getText());
-							
+							//colors circle in meter depending on the values you typed in 
 							if (floatResult < newLower || floatResult > newMax){
 								colorDect.setFill(Color.RED);
 							}
@@ -160,9 +160,9 @@ public class ReaderController {
 						}
 					});
 					i++;
-					//sleeps after every point
+					//sleeps after every point for the amount of time you selected in choice box
 					Thread.sleep(selectedChoice);
-					if(StopBtn.isSelected()){
+					if(StopBtn.isSelected()){//when you press stop button the while loop stops
 						meter.close();
 						break;
 					}

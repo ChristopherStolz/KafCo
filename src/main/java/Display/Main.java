@@ -99,7 +99,7 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 			mainLayout.setCenter(forgotPass);
 		}
 		
-
+		//launchs the program
 		public static void main(String[] args) {
 			launchApp(Main.class, MainView.class, args);
 		}

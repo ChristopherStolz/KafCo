@@ -39,6 +39,8 @@ public class MainLoginController {
 	@FXML
 	public PasswordField PassPassword;
 	
+	
+	//makes the password field so that text in it is hidden 
 	@FXML 
 	public void initialize(){
 		PasswordField PassPassword = new PasswordField();
@@ -53,17 +55,18 @@ public class MainLoginController {
 		
 		String passwordField = PassPassword.getText();
 		//if (userService.checkUser(email, passwordField))
-		if (email.equals("") && passwordField.equals(""))
+		//checks to make sure password and username atch
+		if (email.equals("kparrish@nyit.edu") && passwordField.equals("password") || email.equals("akim@nyit.edu") && passwordField.equals("password") || email.equals("cstolz@nyit.edu") && passwordField.equals("password"))
 		{
 			main.showReaders();
 		}
 		else
-		{
+		{	//error message
 			lblStatus.setText("! User Name or Password is Invalid");
 		}
 
 	}
-	
+	//brings you to forgot password screen when you hit the forgot password button
 	@FXML
 	private void goForgotPass() throws IOException{
 			main.showForgotPass();
