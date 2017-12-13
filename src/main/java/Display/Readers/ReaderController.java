@@ -31,6 +31,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+
 public class ReaderController {
 
 	private Main main;
@@ -50,10 +51,10 @@ public class ReaderController {
 
 
 	@FXML
-	private ChoiceBox comPortBox;
+	private ChoiceBox<String> comPortBox;
 
 	@FXML
-	private ChoiceBox timeIntBox;
+	private ChoiceBox<String> timeIntBox;
 	
 	
 	@FXML
