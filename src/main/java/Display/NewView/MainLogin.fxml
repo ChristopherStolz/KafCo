@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -54,7 +55,10 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="26.0" prefWidth="355.0">
                      <children>
-                        <Label fx:id="lblStatus" textFill="#f80000" />
+                        <Label fx:id="lblStatus" textFill="#f80000">
+                           <effect>
+                              <Glow />
+                           </effect></Label>
                      </children>
                   </HBox>
                </children>

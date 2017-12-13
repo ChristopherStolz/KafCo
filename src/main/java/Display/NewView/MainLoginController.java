@@ -63,6 +63,7 @@ public class MainLoginController {
 		else
 		{	//error message
 			lblStatus.setText("! User Name or Password is Invalid");
+			lblStatus.setStyle("-fx-background-color: #000000 ");
 		}
 
 	}

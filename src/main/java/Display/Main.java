@@ -69,7 +69,7 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("NewView/MainView.fxml"));
 			mainLayout = loader.load();
-			Scene scene = new Scene(mainLayout,800,600);
+			Scene scene = new Scene(mainLayout,5000,700);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}

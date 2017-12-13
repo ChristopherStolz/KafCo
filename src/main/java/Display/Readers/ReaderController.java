@@ -67,7 +67,7 @@ public class ReaderController {
 	//fills ChoiceBoxs and sets there initial value
 	@FXML 
 	public void initialize(){
-		
+		timeIntBox.setStyle("-fx-background-color: #35373a ");
 		timeIntBox.setStyle("-fx-prompt-text-fill: #eee7e7");
 		
 		timeIntBox.setValue("100");
