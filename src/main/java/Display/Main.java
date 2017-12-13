@@ -57,7 +57,7 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("DIYW");//name of doc.
+		this.primaryStage.setTitle("Zoro Reader");//name of doc.
 		
 		showMainView();//calls showMainView (so that it will display)
 		showMainLogin();//Calls ShowMainLogin (so that it will display)
@@ -69,7 +69,7 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("NewView/MainView.fxml"));
 			mainLayout = loader.load();
-			Scene scene = new Scene(mainLayout,800,600);
+			Scene scene = new Scene(mainLayout,5000,700);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}
@@ -99,7 +99,7 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 			mainLayout.setCenter(forgotPass);
 		}
 		
-		//launchs the program
+		//launches the program
 		public static void main(String[] args) {
 			launchApp(Main.class, MainView.class, args);
 		}

@@ -56,13 +56,14 @@ public class MainLoginController {
 		String passwordField = PassPassword.getText();
 		//if (userService.checkUser(email, passwordField))
 		//checks to make sure password and username atch
-		if (email.equals("kparrish@nyit.edu") && passwordField.equals("password") || email.equals("akim@nyit.edu") && passwordField.equals("password") || email.equals("cstolz@nyit.edu") && passwordField.equals("password"))
+		if (email.equals("kparrish@nyit.edu") && passwordField.equals("password") || email.equals("akim07@nyit.edu") && passwordField.equals("password") || email.equals("cstolz@nyit.edu") && passwordField.equals("password"))
 		{
 			main.showReaders();
 		}
 		else
 		{	//error message
 			lblStatus.setText("! User Name or Password is Invalid");
+			lblStatus.setStyle("-fx-background-color: #000000 ");
 		}
 
 	}
