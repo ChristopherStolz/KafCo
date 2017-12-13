@@ -57,7 +57,7 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("DIYW");//name of doc.
+		this.primaryStage.setTitle("Zoro Reader");//name of doc.
 		
 		showMainView();//calls showMainView (so that it will display)
 		showMainLogin();//Calls ShowMainLogin (so that it will display)
@@ -99,7 +99,7 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 			mainLayout.setCenter(forgotPass);
 		}
 		
-		//launchs the program
+		//launches the program
 		public static void main(String[] args) {
 			launchApp(Main.class, MainView.class, args);
 		}
