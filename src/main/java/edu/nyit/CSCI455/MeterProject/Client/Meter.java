@@ -106,19 +106,6 @@ public class Meter {
 		return result;
 	}
 	
-	public void close(){
-		try {
-			serialPort.closePort();
-		} catch (SerialPortException e) {
-			System.err.println("Error closing serial port");
-		}
-	}
-	public boolean write(){
-		/*
-		 * May need this later;
-		 */
-		return false;
-	}
 	
 	public void close(){
 		try {

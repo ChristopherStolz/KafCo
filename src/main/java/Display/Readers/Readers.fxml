@@ -56,18 +56,12 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label text="Choose ComPort" textFill="#eee7e7" />
-                                          <Label text="Time Interval in MillieSeconds" textFill="#eee7e7" GridPane.rowIndex="1" />
-                                          <ChoiceBox fx:id="comPortBox" prefWidth="150.0" style="-fx-background-color: #35373a;" GridPane.columnIndex="1" />
-                                          <ChoiceBox fx:id="timeIntBox" prefWidth="150.0" style="-fx-background-color: #35373a;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="Time Interval in MillieSeconds" textFill="#eee7e7" />
+                                          <ChoiceBox fx:id="timeIntBox" prefWidth="150.0" style="-fx-background-color: #35373a;" GridPane.columnIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>
                               </VBox>
-                              <Button mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #35373a;" text="Connect" textFill="#eee7e7">
-                                 <HBox.margin>
-                                    <Insets top="3.0" />
-                                 </HBox.margin></Button>
                               <ToggleButton fx:id="StratBtn" mnemonicParsing="false" onAction="#chartBtn" prefWidth="80.0" style="-fx-background-color: #35373a;" text="Graph" textFill="#eee7e7">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="Group1" />

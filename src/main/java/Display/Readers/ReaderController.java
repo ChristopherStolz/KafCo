@@ -35,8 +35,6 @@ public class ReaderController {
 
 	private Main main;
 
-	ObservableList<String> comPortList = FXCollections
-			.observableArrayList("1","2","3","4");
 
 	ObservableList<String> timeIntList = FXCollections
 			.observableArrayList("100","200","300","400","500","600","700","800","900","1000");
@@ -69,10 +67,9 @@ public class ReaderController {
 	//fills ChoiceBoxs and sets there initial value
 	@FXML 
 	public void initialize(){
-		comPortBox.setStyle("-fx-prompt-text-fill: #eee7e7");
+		
 		timeIntBox.setStyle("-fx-prompt-text-fill: #eee7e7");
-		comPortBox.setValue("1");
-		comPortBox.setItems(comPortList);
+		
 		timeIntBox.setValue("100");
 		timeIntBox.setItems(timeIntList);
 		
@@ -127,7 +124,7 @@ public class ReaderController {
 		float[] floatArray = new float[101];
 		AreaChart.getData().add(series);//graphs point
 
-		Meter meter = new Meter("meter-", 100); //Instantiates a meter; 100 is where the time offset should go
+		Meter meter = new Meter("meter-", selectedChoice); //Instantiates a meter; 100 is where the time offset should go
 
 		
 		Task task = new Task<Boolean>() {
