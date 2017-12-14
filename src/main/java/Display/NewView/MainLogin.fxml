@@ -49,7 +49,7 @@
                   <HBox alignment="CENTER" prefHeight="37.0" prefWidth="600.0" spacing="20.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#goReader" prefWidth="120.0" style="-fx-background-color: #35373a;" text="Login" textFill="#f8f7f7" />
-                        <Button mnemonicParsing="false" onAction="#goForgotPass" prefWidth="120.0" style="-fx-background-color: #35373a;" text="Forgot Password" textFill="#f8f7f7" />
+                        <Button mnemonicParsing="false" onAction="#goForgotPass" prefWidth="120.0" style="-fx-background-color: #35373a; visibility: false;" text="Forgot Password" textFill="#f8f7f7" />
                      </children>
                      <padding>
                         <Insets left="60.0" />
