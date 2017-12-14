@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 @FXMLController
 public class MainLoginController {
@@ -24,9 +26,6 @@ public class MainLoginController {
 
 	@Autowired
 	private UserService userService;
-	
-	@FXML
-	private Label lblWelcome;
 
 
 	@FXML
@@ -39,6 +38,7 @@ public class MainLoginController {
 	@FXML
 	public PasswordField PassPassword;
 	
+
 	
 	//makes the password field so that text in it is hidden 
 	@FXML 
