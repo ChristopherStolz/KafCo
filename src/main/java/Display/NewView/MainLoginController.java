@@ -1,8 +1,23 @@
 package Display.NewView;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
@@ -54,9 +69,31 @@ public class MainLoginController {
 		String email = txtUserName.getText();
 		
 		String passwordField = PassPassword.getText();
-		//if (userService.checkUser(email, passwordField))
-		//checks to make sure password and username atch
-		if (email.equals("kparrish@nyit.edu") && passwordField.equals("password") || email.equals("akim07@nyit.edu") && passwordField.equals("password") || email.equals("cstolz@nyit.edu") && passwordField.equals("password"))
+		//checks to make sure password and username match
+		String message = "";
+		try{
+		HttpClient httpclient = new DefaultHttpClient();
+		URI uri = new URI("http://localhost:8080/db/user/authorize");
+		HttpPost httppost = new HttpPost(uri);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("email", email));
+		nameValuePairs.add(new BasicNameValuePair("password", passwordField));
+
+		
+		UrlEncodedFormEntity form;
+		form = new UrlEncodedFormEntity(nameValuePairs, "UTF-8");
+		form.setContentEncoding(HTTP.UTF_8);
+		httppost.setEntity(form);
+		
+		HttpResponse response = httpclient.execute(httppost);
+		BufferedReader br = new BufferedReader(
+				new InputStreamReader(response.getEntity().getContent()));
+		message = br.readLine();
+		EntityUtils.consume((HttpEntity) httpclient);
+		}catch (Exception e){
+			e.printStackTrace(System.err);
+		}
+		if(message.contains("true"))
 		{
 			main.showReaders();
 		}

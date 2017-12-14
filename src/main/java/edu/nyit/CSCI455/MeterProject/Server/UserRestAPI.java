@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.nyit.CSCI455.MeterProject.Data.UserRepository;
+import edu.nyit.CSCI455.MeterProject.Data.UserService;
 import edu.nyit.CSCI455.MeterProject.Data.User;
 
 @RestController
@@ -17,6 +20,8 @@ import edu.nyit.CSCI455.MeterProject.Data.User;
 public class UserRestAPI {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired 
+	UserService userService;
 	
 	@RequestMapping("/create")
 	 public Map<String, Object> create(User data) {
@@ -27,6 +32,13 @@ public class UserRestAPI {
 		  dataMap.put("status", "1");
 		  dataMap.put("data", data);
 		     return dataMap;
+	}
+	@PostMapping("/authorize")
+	public Map<String, Object> authorize(@RequestParam String email,
+							 @RequestParam String password){
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("status", String.valueOf(userService.checkUser(email, password)));
+		return dataMap;
 	}
 	
 	@RequestMapping("/read-all")

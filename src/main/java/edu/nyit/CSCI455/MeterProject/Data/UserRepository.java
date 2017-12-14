@@ -11,10 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends MongoRepository<User, String>{
 
-/**
- * TODO: Define database calls available
- * Update
- */
 	public List<User> findAll();
 	public User findByEmail(String email);
 }
