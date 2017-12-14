@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -23,6 +24,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 
 public class Meter {
@@ -135,16 +137,6 @@ public class Meter {
 	}
 	@SuppressWarnings("deprecation")
 	public int RestWrite(){
-//		URL adr = new URL("localhost:8080/db/create");
-//		HttpURLConnection con = (HttpURLConnection) adr.openConnection();
-//		
-//		con.setRequestMethod("POST");
-//		
-//		con.setRequestProperty("User-Agent","Mozilla/5.0");
-//		
-//		con.setDoOutput(true);
-//		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-//		wr.writeBytes(urlParameters);
 		try{
 		HttpClient httpclient = new DefaultHttpClient();
 		URI uri = new URI("http://localhost:8080/db/create");
@@ -162,6 +154,8 @@ public class Meter {
 		httppost.setEntity(form);
 		
 		HttpResponse response = httpclient.execute(httppost);
+		
+		EntityUtils.consume((HttpEntity) httpclient);
 		return response.getStatusLine().getStatusCode();
 		}catch (Exception e){
 			e.printStackTrace(System.err);

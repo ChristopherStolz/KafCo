@@ -87,7 +87,7 @@ public class WebController {
 	}
 	@RequestMapping("/usercp")
 	public String usercp(ModelAndView modelAndView){
-		return "usercp";
+		return "UserCP";
 	}
 	@RequestMapping("/dataview")
 	public String dataview(ModelAndView modelAndView){

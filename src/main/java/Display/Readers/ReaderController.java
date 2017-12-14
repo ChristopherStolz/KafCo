@@ -166,7 +166,6 @@ public class ReaderController {
 					//sleeps after every point for the amount of time you selected in choice box
 					Thread.sleep(selectedChoice);
 					if(StopBtn.isSelected()){//when you press stop button the while loop stops
-						lowerG.setText(""+ meter.RestWrite());
 						meter.close();
 						break;
 					}
