@@ -6,8 +6,23 @@ import jssc.SerialPort;
 import jssc.SerialPortException;
 import jssc.SerialPortList;
 
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 
 
 public class Meter {
@@ -118,7 +133,41 @@ public class Meter {
 	public DataRun getData (){
 		return myData;
 	}
-	
+	@SuppressWarnings("deprecation")
+	public int RestWrite(){
+//		URL adr = new URL("localhost:8080/db/create");
+//		HttpURLConnection con = (HttpURLConnection) adr.openConnection();
+//		
+//		con.setRequestMethod("POST");
+//		
+//		con.setRequestProperty("User-Agent","Mozilla/5.0");
+//		
+//		con.setDoOutput(true);
+//		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+//		wr.writeBytes(urlParameters);
+		try{
+		HttpClient httpclient = new DefaultHttpClient();
+		URI uri = new URI("http://localhost:8080/db/create");
+		HttpPost httppost = new HttpPost(uri);
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("id", this.getData().getId()));
+		nameValuePairs.add(new BasicNameValuePair("date", this.getData().getDate()));
+		nameValuePairs.add(new BasicNameValuePair("timeOffset", "" + this.getTimeOffset()));
+		nameValuePairs.add(new BasicNameValuePair("data", this.getData().toString()));
+		nameValuePairs.add(new BasicNameValuePair("meterName", this.getData().getMeterName()));
+		
+		UrlEncodedFormEntity form;
+		form = new UrlEncodedFormEntity(nameValuePairs, "UTF-8");
+		form.setContentEncoding(HTTP.UTF_8);
+		httppost.setEntity(form);
+		
+		HttpResponse response = httpclient.execute(httppost);
+		return response.getStatusLine().getStatusCode();
+		}catch (Exception e){
+			e.printStackTrace(System.err);
+		}
+		return -1;
+	}
 	public boolean setTimeOffset (int timeOffset) {
 		this.timeOffset = timeOffset;
 		return true;

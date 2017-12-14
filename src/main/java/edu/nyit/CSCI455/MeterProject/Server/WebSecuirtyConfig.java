@@ -26,7 +26,8 @@ public class WebSecuirtyConfig extends WebSecurityConfigurerAdapter{
 					    "/welcome", 
 					    "/signup", 
 					    "/doSignUp", 
-					    "/doLogin").permitAll();
+					    "/doLogin",
+					    "/db/create").permitAll();
 		http
 			.authorizeRequests()
 				.antMatchers("/admincp").hasAuthority("Admin")

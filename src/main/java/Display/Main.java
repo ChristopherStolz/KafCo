@@ -16,38 +16,13 @@ import edu.nyit.CSCI455.MeterProject.Data.DataRepository;
 import edu.nyit.CSCI455.MeterProject.Data.DataService;
 import edu.nyit.CSCI455.MeterProject.Data.UserRepository;
 import edu.nyit.CSCI455.MeterProject.Data.UserService;
-
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-@SpringBootApplication
-public class Main  extends AbstractJavaFxApplicationSupport{
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
-	DataRepository dataRepository;
-	
-	@Autowired
-	UserService userService;
-	
-	@Bean
-	public UserService userService(){
-		return new UserService();
-	}
-	
-	@Bean
-	public DataService dataService(){
-		return new DataService();
-	}
-	
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+public class Main  extends Application{
 	
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
@@ -101,6 +76,6 @@ public class Main  extends AbstractJavaFxApplicationSupport{
 		
 		//launches the program
 		public static void main(String[] args) {
-			launchApp(Main.class, MainView.class, args);
+			launch(Main.class, args);
 		}
 }

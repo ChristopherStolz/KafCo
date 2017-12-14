@@ -74,10 +74,30 @@ public class DataRun{
 	public void setData(ArrayList<String> data) {
 		this.data = data;
 	}
+	public void setDataString(String data){
+		ArrayList<String> myData = new ArrayList<String>();
+		String[] parsed = data.split(",");
+		for(int i = 0; i < parsed.length; i++){
+			myData.add(parsed[i]);
+		}
+		this.data = myData;
+	}
 	public void setTimeOffset(int offset){
 		timeOffset = offset;
 	}
 	public int getTimeOffset(){
 		return timeOffset;
+	}
+	@Override
+	public String toString(){
+		String returnString = null;
+		if(data.size() > 0){
+			returnString = data.get(0);
+			for(int i = 1; i < data.size(); i++){
+				returnString = returnString + "," +
+								data.get(i);
+			}
+		}
+		return returnString;
 	}
 }

@@ -149,14 +149,16 @@ public class ReaderController {
 							series.getData().add(new XYChart.Data<String, Number>(num , floatResult));
 							//fill graph
 							meterLine.setRotate((179.9/580)*floatResult);//converts data into degrees
-							int newLower = Integer.parseInt(lowerG.getText());
-							int newMax = Integer.parseInt(maximumG.getText());
-							//colors circle in meter depending on the values you typed in 
-							if (floatResult < newLower || floatResult > newMax){
-								colorDect.setFill(Color.RED);
-							}
-							else{
-								colorDect.setFill(Color.GREEN);
+							if(!lowerG.equals("")){
+								int newLower = Integer.parseInt(lowerG.getText());
+								int newMax = Integer.parseInt(maximumG.getText());
+								//colors circle in meter depending on the values you typed in 
+								if (floatResult < newLower || floatResult > newMax){
+									colorDect.setFill(Color.RED);
+								}
+								else{
+									colorDect.setFill(Color.GREEN);
+								}
 							}
 						}
 					});
@@ -164,6 +166,7 @@ public class ReaderController {
 					//sleeps after every point for the amount of time you selected in choice box
 					Thread.sleep(selectedChoice);
 					if(StopBtn.isSelected()){//when you press stop button the while loop stops
+						lowerG.setText(""+ meter.RestWrite());
 						meter.close();
 						break;
 					}
