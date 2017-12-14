@@ -31,7 +31,8 @@ public class DataRestAPI {
 		  newData.setId(id);
 		  newData.setDataString(data);
 		  
-		  dataRepository.save(newData);
+		  System.err.println(dataRepository.save(newData));
+		  
 		  Map<String, Object> dataMap = new HashMap<String, Object>();
 		  dataMap.put("message", "Data created successfully");
 		  dataMap.put("status", "1");

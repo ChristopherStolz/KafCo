@@ -41,12 +41,6 @@ public class WebController {
 		return new ArrayList<DataRun>(dataService.findAll());
 	}
 	
-//	@ModelAttribute("result")
-//	public DataRun getResult(String id){
-//		DataRun data = dataService.findById(id);
-//		return (data != null) ? data : new DataRun();
-//	}
-	
 	@RequestMapping("/")
 	public String base(ModelAndView modelAndView,
 						@ModelAttribute User user){

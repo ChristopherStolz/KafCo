@@ -155,7 +155,8 @@ public class Meter {
 		
 		HttpResponse response = httpclient.execute(httppost);
 		
-		EntityUtils.consume((HttpEntity) httpclient);
+		
+		//EntityUtils.consume((HttpEntity) httpclient);
 		response.getEntity().getContent();
 		}catch (Exception e){
 			e.printStackTrace(System.err);

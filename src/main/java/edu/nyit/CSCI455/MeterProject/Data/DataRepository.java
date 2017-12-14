@@ -11,10 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface DataRepository extends MongoRepository<DataRun, String>{
 
-/**
- * TODO: Define database calls available
- * Update
- */
 	public List<DataRun> findAll(); 
 	public DataRun findByid(String id);
 }
