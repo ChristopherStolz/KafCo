@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.nyit.CSCI455.MeterProject.Data.DataRepository;
@@ -18,10 +20,18 @@ public class DataRestAPI {
 	@Autowired
 	private DataRepository dataRepository;
 	
-	@RequestMapping("/create")
-	 public Map<String, Object> create(DataRun data) {
-		  data.setDate(new Date().toString());
-		  data = dataRepository.save(data);
+	@PostMapping("/create")
+	 public Map<String, Object> create(@RequestParam String id,
+			 						   @RequestParam String date,
+			 						   @RequestParam String timeOffset,
+			 						   @RequestParam String data,
+			 						   @RequestParam String meterName) {
+		  DataRun newData = new DataRun(meterName, date,
+				  				Integer.parseInt(timeOffset));
+		  newData.setId(id);
+		  newData.setDataString(data);
+		  
+		  dataRepository.save(newData);
 		  Map<String, Object> dataMap = new HashMap<String, Object>();
 		  dataMap.put("message", "Data created successfully");
 		  dataMap.put("status", "1");
